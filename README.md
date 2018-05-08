@@ -8,6 +8,47 @@ Creating an Android Boilerplate project with best configuration. This repository
 
 - 05-2018 [Gradle: Android Build Variables Done Right](https://medium.com/@rafamatias/gradle-android-build-variables-done-right-d0c0e296ee93)
 
+## Build Types
+
+![Build Types](images/build-types.jpg)
+
+## Build Variables
+
+Define build variables just using Gradle:
+
+[app/gradle.properties](app/gradle.properties)
+
+```
+API_URL=""
+DATABASE=""
+```
+
+[app/build.gradle](app/build.gradle)
+
+```
+android{
+	...
+	buildTypes {
+	    debug {
+	        applicationIdSuffix ".debug"
+	        buildConfigField "String", "API_URL", DEBUG_API_URL
+	    }
+	    internal {
+	        applicationIdSuffix ".test"
+	        buildConfigField "String", "API_URL", INTERNAL_API_URL
+	    }
+	    staging {
+	        applicationIdSuffix ".staging"
+	        buildConfigField "String", "API_URL", STAGING_API_URL
+	    }
+	    release {
+	        buildConfigField "String", "API_URL", API_URL
+	        ....
+	    }
+	}
+}
+```
+
 
 # License
 MIT License
